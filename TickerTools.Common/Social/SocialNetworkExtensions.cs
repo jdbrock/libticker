@@ -37,6 +37,11 @@ namespace System
             return messages.Where(X => strings.Any(S => X.Text.StartsWith(S, StringComparison.OrdinalIgnoreCase)));
         }
 
+        public static IEnumerable<SocialNetworkMessage> StartsWithText(this IEnumerable<SocialNetworkMessage> messages, StringComparison comparison, params String[] strings)
+        {
+            return messages.Where(X => strings.Any(S => X.Text.StartsWith(S, comparison)));
+        }
+
         public static IEnumerable<SocialNetworkMessage> EndsWithText(this IEnumerable<SocialNetworkMessage> messages, params String[] strings)
         {
             return messages.Where(X => strings.Any(S => X.Text.EndsWith(S, StringComparison.OrdinalIgnoreCase)));

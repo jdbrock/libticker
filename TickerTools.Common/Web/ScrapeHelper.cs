@@ -31,10 +31,14 @@ namespace TickerTools.Common
             return htmlNode;
         }
 
-        public static async Task<HtmlNode> FetchParseAsync(String uri, String proxy = null, Boolean assumeUnicode = false, Int32? timeoutSecs = null)
+        public static async Task<HtmlNode> FetchParseAsync(String uri, String proxy = null, Boolean assumeUnicode = false, Int32? timeoutSecs = null,
+            Func<string, string> transform = null)
         {
             var webClient = new ScrapeClient(uri, userAgent: USER_AGENT, assumeUnicode: assumeUnicode, proxy: proxy, timeoutSecs: timeoutSecs);
             var html = await webClient.GetPageAsync();
+
+            if (transform != null)
+                html = transform(html);
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(html);

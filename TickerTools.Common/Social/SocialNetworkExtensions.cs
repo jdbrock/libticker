@@ -52,6 +52,14 @@ namespace System
             return messages.Where(X => strings.Any(S => X.Text.Contains(S, CompareOptions.OrdinalIgnoreCase)));
         }
 
+        public static IEnumerable<SocialNetworkMessage> NotContainsText(this IEnumerable<SocialNetworkMessage> messages, params String[] strings)
+        {
+            if (messages.Count() == 0)
+                return messages;
+
+            return messages.Where(X => strings.All(S => !X.Text.Contains(S, CompareOptions.OrdinalIgnoreCase)));
+        }
+
         public static IEnumerable<SocialNetworkMessage> StripTextAnywhere(this IEnumerable<SocialNetworkMessage> messages, params String[] strings)
         {
             return messages.Select(X =>

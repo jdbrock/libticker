@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tweetinvi;
 using Tweetinvi.Core.Credentials;
 using Tweetinvi.Core.Interfaces;
+using Tweetinvi.Models;
 
 namespace TickerTools.Common
 {
@@ -96,7 +97,7 @@ namespace TickerTools.Common
                 if (tweets == null)
                     return null;
 
-                return tweets;
+                return tweets.Where(x => !x.IsRetweet);
             });
         }
     }

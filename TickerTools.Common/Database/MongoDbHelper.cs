@@ -56,7 +56,10 @@ namespace TickerTools.Common
             CheckInitialized();
 
             var client = new MongoClient(_connectionString);
-            var db = client.GetDatabase("edintaps");
+
+            var db = _connectionString.Contains("edintaps-dev")
+                ? client.GetDatabase("edintaps-dev")
+                : client.GetDatabase("edintaps");
 
             return db.GetCollection<T>(name);
         }

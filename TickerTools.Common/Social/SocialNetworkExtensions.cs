@@ -17,6 +17,12 @@ namespace System
             return messages.Where(X => X.Images.Any());
         }
 
+        public static IEnumerable<SocialNetworkMessage> HasImages(this IEnumerable<SocialNetworkMessage> messages,
+            int min, int max)
+        {
+            return messages.Where(X => X.Images.Count >= min && X.Images.Count <= max);
+        }
+
         public static IEnumerable<SocialNetworkMessage> HasOneImage(this IEnumerable<SocialNetworkMessage> messages)
         {
             return messages.Where(X => X.Images.Count == 1);
